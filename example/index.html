@@ -19,12 +19,12 @@
 <body>
     <canvas id="example"></canvas>
     <script type="module">
-        import Sequence from "sequence-canvas";
+        import SequenceCanvas from "../lib/sequence-canvas.esm.js";
         function createPathImage(index) {
           return `https://kranteh-pro.ru/wp-content/themes/base/assets/i/1/LKS_seq001_${index.toString().padStart(5, '0')}.webp`;
         }
         const arrayPathImages = [...new Array(100).fill('').map((_, i) => createPathImage(i))];
-        const canvas = new Sequence({
+        const canvas = new SequenceCanvas({
             canvas: { // Required
                 element: document.querySelector('canvas#example'), // Required
                 width: 1920, // Optional - width canvas
