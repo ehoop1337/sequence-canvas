@@ -1,5 +1,4 @@
 # sequence-canvas
----
 Frame-by-frame reproduction of images in HTML Canvas
 
 ### Installation
