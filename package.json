@@ -10,8 +10,8 @@
   ],
   "author": "Sayfutdinov Ruslan <sayfutdinov.ruslan@gmail.com>",
   "license": "MIT",
-  "main": "./lib/sequence-canvas.js",
-  "types": "./lib/sequence-canvas.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/ehoop1337/sequence-canvas"
