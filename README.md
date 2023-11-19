@@ -1,7 +1,7 @@
 # sequence-canvas
 Frame-by-frame reproduction of images in HTML Canvas
 
-### Installation
+## Installation
 ```sh
     npm install sequence-canvas@0.1.0
 ```
@@ -19,7 +19,7 @@ Frame-by-frame reproduction of images in HTML Canvas
     });
 ```
 
-### Settings
+## Settings
 
 `Required`
 
