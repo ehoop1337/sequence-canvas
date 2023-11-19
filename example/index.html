@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *, ::before, ::after {
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="example"></canvas>
+    <script type="module">
+        import Sequence from "../lib";
+        function createPathImage(index) {
+          return `https://kranteh-pro.ru/wp-content/themes/base/assets/i/1/LKS_seq001_${index.toString().padStart(5, '0')}.webp`;
+        }
+        const arrayPathImages = [...new Array(100).fill('').map((_, i) => createPathImage(i))];
+        const canvas = new Sequence({
+            canvas: { // Required
+                element: document.querySelector('canvas#example'), // Required
+                width: 1920, // Optional - width canvas
+                height: 950, // Optional - height canvas
+            },
+            images: { // Required
+                paths: arrayPathImages, // Required - array of image paths
+                // options: { // Optional - options images
+                //   size: { // Optional - Size images
+                //     width: 1920 / 2, // Required - width images
+                //     height: 950 / 2, // Required - height images
+                //   },
+                //   position: { // Optional - Position images
+                //     x: 1920 / 4, // Required - x position images
+                //     y: 950 / 4 // Required - y position images
+                //   },
+                //   trim: { // Optional - trim images
+                //     x: 1420, // Required - x trim images
+                //     y: 50, // Required - y trim images
+                //     width: 500, // Required - width trim images
+                //     height: 950 - 50 // Required - height trim images
+                //   }
+                // }
+            },
+            // direction: -1,
+            // fps: 10,
+            // loop: false,
+            // init: false,
+            // startIndex: 1,
+            // finishIndex: 98,
+            // startImmediately: true,
+            // startAfterLoaded: false
+            // logging: true
+        });
+        // canvas.on('init', function(event) {
+        //   console.log('Init sequence canvas', event);
+        // });
+        // canvas.on('load', function(event) {
+        //   console.log('Load image', event);
+        // });
+        // canvas.on('loaded', function(event) {
+        //   console.log('Loaded images', event);
+        // });
+        // canvas.on('render', function(event) {
+        //   console.log('Render image', event);
+        // });
+        // canvas.on('start', function(event) {
+        //   console.log('Start render', event);
+        // });
+        // canvas.on('play', function(event) {
+        //   console.log('Play render', event);
+        // });
+        // canvas.on('stop', function(event) {
+        //   console.log('Stop render', event);
+        // });
+        // canvas.on('pause', function(event) {
+        //   console.log('Pause render', event);
+        // });
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "sequence-canvas",
+  "version": "0.1.0",
+  "description": "Frame-by-frame reproduction of images in HTML Canvas",
+  "keywords": [
+    "canvas",
+    "images",
+    "js",
+    "sequence"
+  ],
+  "author": "Sayfutdinov Ruslan <sayfutdinov.ruslan@gmail.com>",
+  "license": "MIT",
+  "main": "./lib/sequence-canvas.js",
+  "types": "./lib/sequence-canvas.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ehoop1337/sequence-canvas"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
