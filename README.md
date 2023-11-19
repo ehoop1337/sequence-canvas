@@ -7,12 +7,11 @@ Frame-by-frame reproduction of images in HTML Canvas
 ```
 ```javascript
     import SequenceCanvas from 'sequence-canvas';
-
+```
+```javascript
     const canvas = new SequenceCanvas({
         canvas: {
-            element: document.querySelector('canvas'),
-            width: 1920,
-            height: 950,
+            element: document.querySelector('canvas')
         },
         images: {
             paths: arrayPathImages
@@ -24,10 +23,15 @@ Frame-by-frame reproduction of images in HTML Canvas
 
 `Required`
 
+| Option | Type  | Description |
+| ------ | ------ | ------ |
+| canvas | object |  |
+| images | object |  |
+
+`Optional`
+
 | Option | Type | Default | Description |
 | ------ | ------ | ------ | ------ |
-| canvas | object |  |  |
-| images | object |  |  |
 | init | boolean | true |  |
 | direction | 1 \| -1 | 1 |  |
 | loop | boolean | true |  |
