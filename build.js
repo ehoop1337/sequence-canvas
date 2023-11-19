@@ -11,11 +11,6 @@ const shared = {
   sourcemap: true,
   bundle: true,
 }
-//
-// build({
-//   ...shared,
-//   outfile: 'lib/sequence-canvas.js',
-// })
 
 build({
   ...shared,
