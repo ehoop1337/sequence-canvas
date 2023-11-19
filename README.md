@@ -26,12 +26,28 @@ Frame-by-frame reproduction of images in HTML Canvas
 | Option | Type  | Description |
 | ------ | ------ | ------ |
 | canvas | object |  |
+| canvas.element | HTMLCanvasElement |  |
 | images | object |  |
+| images.paths | array |  |
 
 `Optional`
 
 | Option | Type | Default | Description |
 | ------ | ------ | ------ | ------ |
+| canvas.width | number |  |  |
+| canvas.height | number |  |  |
+| images.options | object |  |  |
+| images.options.position | object |  |  |
+| images.options.position.x | number |  |  |
+| images.options.position.y | number |  |  |
+| images.options.trim | object |  |  |
+| images.options.trim.x | number |  |  |
+| images.options.trim.y | number |  |  |
+| images.options.trim.width | number |  |  |
+| images.options.trim.height | number |  |  |
+| images.options.size | object |  |  |
+| images.options.size.width | number |  |  |
+| images.options.size.height | number |  |  |
 | init | boolean | true |  |
 | direction | 1 \| -1 | 1 |  |
 | loop | boolean | true |  |
@@ -74,4 +90,11 @@ canvas.on('pause', function() {
 })
 ```
 
+## Authors
+
+- [@ehoop1337](https://www.github.com/ehoop1337)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
 
