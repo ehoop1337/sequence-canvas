@@ -8,11 +8,12 @@
     "js",
     "sequence"
   ],
-  "author": "Sayfutdinov Ruslan <sayfutdinov.ruslan@gmail.com>",
+  "author": "Sayfutdinov Ruslan <sayfutdinov.ruslan@icloud.com>",
   "license": "MIT",
   "main": "./lib/sequence-canvas.esm.js",
   "module": "./lib/sequence-canvas.esm.js",
   "types": "./lib/sequence-canvas.d.ts",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/ehoop1337/sequence-canvas"
