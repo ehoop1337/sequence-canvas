@@ -8,9 +8,6 @@ Frame-by-frame reproduction of images in HTML Canvas
 ```javascript
     import SequenceCanvas from 'sequence-canvas';
 ```
-```html
-    <script src="sequence-canvas.js" type="module"></script>
-```
 
 ### Settings
 
