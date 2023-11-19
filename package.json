@@ -16,10 +16,16 @@
     "type": "git",
     "url": "https://github.com/ehoop1337/sequence-canvas"
   },
+  "bugs": {
+    "url": "https://github.com/ehoop1337/sequence-canvas/issues"
+  },
   "scripts": {
     "build": "tsc"
   },
   "devDependencies": {
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "sequence-canvas": "^0.1.0"
   }
 }
