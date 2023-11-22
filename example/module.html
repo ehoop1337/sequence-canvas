@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Module SequenceCanvas</title>
     <style>
         *, ::before, ::after {
             box-sizing: border-box;
@@ -17,13 +17,19 @@
     </style>
 </head>
 <body>
+
+    <!-- Canvas -->
     <canvas id="example"></canvas>
+
+    <!-- Connection and usage -->
     <script type="module">
-        import SequenceCanvas from "../lib/sequence-canvas.esm.js";
+        import SequenceCanvas from "../lib/sequence-canvas.mjs";
+
         function createPathImage(index) {
           return `https://kranteh-pro.ru/wp-content/themes/base/assets/i/1/LKS_seq001_${index.toString().padStart(5, '0')}.webp`;
         }
         const arrayPathImages = [...new Array(100).fill('').map((_, i) => createPathImage(i))];
+
         const canvas = new SequenceCanvas({
             canvas: { // Required
                 element: document.querySelector('canvas#example'), // Required

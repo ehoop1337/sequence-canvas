@@ -48,7 +48,7 @@ declare module 'sequence-canvas/index' {
    * @name SequenceCanvas
    * @class
    */
-  class SequenceCanvas {
+  export default class SequenceCanvas {
       #private;
       canvas: HTMLCanvasElement;
       context: CanvasRenderingContext2D;
@@ -180,7 +180,7 @@ declare module 'sequence-canvas/index' {
       }): void;
       on(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void): void;
   }
-  export default SequenceCanvas;
+  export {};
 
 }
 declare module 'sequence-canvas' {
