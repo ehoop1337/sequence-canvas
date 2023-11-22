@@ -3,7 +3,7 @@ Frame-by-frame reproduction of images in HTML Canvas
 
 ## Installation
 ```sh
-    npm install sequence-canvas@0.1.0
+    npm install sequence-canvas
 ```
 ```javascript
     import SequenceCanvas from 'sequence-canvas';
