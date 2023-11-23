@@ -65,7 +65,7 @@ Frame-by-frame reproduction of images in HTML Canvas
 | startAfterLoaded | boolean | true |  |
 | logging | boolean | false |  |
 
-## Usage of methods
+## Methods
 | Method | Description |
 | ------ | ------ |
 | start |  |
@@ -73,7 +73,8 @@ Frame-by-frame reproduction of images in HTML Canvas
 | pause |  |
 | stop |  |
 
-## Usage of methods
+#### Usage of methods
+
 ```javascript
 const canvas = new SequenceCanvas({
   ...
@@ -82,7 +83,7 @@ const canvas = new SequenceCanvas({
 canvas.pause();
 ```
 
-## Usage of events
+## Events
 
 | Event | Description |
 | ------ | ------ |
@@ -94,6 +95,8 @@ canvas.pause();
 | play |  |
 | pause |  |
 | stop |  |
+
+#### Usage of events
 
 ```javascript
 const canvas = new SequenceCanvas({
