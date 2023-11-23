@@ -1,6 +1,6 @@
 {
   "name": "sequence-canvas",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Frame-by-frame reproduction of images in HTML Canvas",
   "keywords": [
     "canvas",
@@ -11,13 +11,15 @@
   ],
   "author": "Sayfutdinov Ruslan <sayfutdinov.ruslan@icloud.com>",
   "license": "MIT",
-  "main": "./lib/sequence-canvas.cjs",
-  "module": "./lib/sequence-canvas.mjs",
   "types": "./lib/index.d.ts",
-  "exports": {
-    "import": "./lib/sequence-canvas.mjs",
-    "require": "./lib/sequence-canvas.cjs"
-  },
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.mjs",
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ehoop1337/sequence-canvas"
