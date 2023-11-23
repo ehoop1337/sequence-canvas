@@ -286,7 +286,7 @@ export default class SequenceCanvas {
         height: number;
     };
     /**
-     * Setting image options
+     * Set image options
      *
      * @method
      * @public
@@ -296,7 +296,7 @@ export default class SequenceCanvas {
      */
     setImageOptions(options: ImageOptionsSequenceCanvas): void;
     /**
-     * Getting image settings
+     * Get image settings
      *
      * @method
      * @public
@@ -304,17 +304,126 @@ export default class SequenceCanvas {
      * @return {ReturnImageOptionsSequenceCanvas}
      */
     getImageSettings(): ReturnImageOptionsSequenceCanvas;
+    /**
+     * Set fps
+     *
+     * @method
+     * @public
+     * @name setFps
+     * @param {number} value
+     * @return {void}
+     */
     setFps(value: number): void;
+    /**
+     * Get fps
+     *
+     * @method
+     * @public
+     * @name getFps
+     * @return {number}
+     */
     getFps(): number;
+    /**
+     * Set direction
+     *
+     * @method
+     * @public
+     * @name setDirection
+     * @param {DirectionSequenceCanvas} value
+     * @return {void}
+     */
     setDirection(value: DirectionSequenceCanvas): void;
+    /**
+     * Get direction
+     *
+     * @method
+     * @public
+     * @name getDirection
+     * @return {DirectionSequenceCanvas}
+     */
     getDirection(): DirectionSequenceCanvas;
+    /**
+     * Set loop
+     *
+     * @method
+     * @public
+     * @name setLoop
+     * @param {boolean} value
+     * @return {void}
+     */
     setLoop(value: boolean): void;
+    /**
+     * Get loop
+     *
+     * @method
+     * @public
+     * @name getLoop
+     * @return {boolean}
+     */
     getLoop(): boolean;
+    /**
+     * Set start index
+     *
+     * @method
+     * @public
+     * @name setStartIndex
+     * @param {number} index
+     * @return {void}
+     */
     setStartIndex(index: number): void;
+    /**
+     * Get start index
+     *
+     * @method
+     * @public
+     * @name getStartIndex
+     * @return {number}
+     */
     getStartIndex(): number;
+    /**
+     * Set finish index
+     *
+     * @method
+     * @public
+     * @name setFinishIndex
+     * @param {number} index
+     * @return {void}
+     */
     setFinishIndex(index: number): void;
+    /**
+     * Get finish index
+     *
+     * @method
+     * @public
+     * @name getFinishIndex
+     * @return {number}
+     */
     getFinishIndex(): number;
+    /**
+     * Enable logging
+     *
+     * @method
+     * @public
+     * @name enableLogging
+     * @return {void}
+     */
     enableLogging(): void;
+    /**
+     * Disable logging
+     *
+     * @method
+     * @public
+     * @name disableLogging
+     * @return {void}
+     */
     disableLogging(): void;
+    /**
+     * Get logging
+     *
+     * @method
+     * @public
+     * @name getLogging
+     * @return {void}
+     */
     getLogging(): boolean;
 }

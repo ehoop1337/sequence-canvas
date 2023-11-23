@@ -672,7 +672,7 @@ export default class SequenceCanvas {
 
 
   /**
-   * Setting image options
+   * Set image options
    *
    * @method
    * @public
@@ -698,7 +698,7 @@ export default class SequenceCanvas {
 
 
   /**
-   * Getting image settings
+   * Get image settings
    *
    * @method
    * @public
@@ -726,29 +726,109 @@ export default class SequenceCanvas {
   }
 
 
+
+  /**
+   * Set fps
+   *
+   * @method
+   * @public
+   * @name setFps
+   * @param {number} value
+   * @return {void}
+   */
+
   setFps(value: number): void {
     this.fps = typeof value === 'number' && 60 >= value && value > 0 ? value : 60;
   }
+
+
+
+  /**
+   * Get fps
+   *
+   * @method
+   * @public
+   * @name getFps
+   * @return {number}
+   */
 
   getFps(): number {
     return this.fps;
   }
 
+
+
+  /**
+   * Set direction
+   *
+   * @method
+   * @public
+   * @name setDirection
+   * @param {DirectionSequenceCanvas} value
+   * @return {void}
+   */
+
   setDirection(value: DirectionSequenceCanvas): void {
     this.direction = value;
   }
+
+
+
+  /**
+   * Get direction
+   *
+   * @method
+   * @public
+   * @name getDirection
+   * @return {DirectionSequenceCanvas}
+   */
 
   getDirection(): DirectionSequenceCanvas {
     return this.direction
   }
 
+
+
+  /**
+   * Set loop
+   *
+   * @method
+   * @public
+   * @name setLoop
+   * @param {boolean} value
+   * @return {void}
+   */
+
   setLoop(value: boolean): void {
     this.loop = value;
   }
 
+
+
+  /**
+   * Get loop
+   *
+   * @method
+   * @public
+   * @name getLoop
+   * @return {boolean}
+   */
+
   getLoop(): boolean {
     return this.loop
   }
+
+
+
+  /**
+   * Set start index
+   *
+   * @method
+   * @public
+   * @name setStartIndex
+   * @param {number} index
+   * @return {void}
+   */
 
   setStartIndex(index: number): void {
     if (index > this.images.length) {
@@ -762,9 +842,32 @@ export default class SequenceCanvas {
     this.startIndex = index;
   }
 
+
+
+  /**
+   * Get start index
+   *
+   * @method
+   * @public
+   * @name getStartIndex
+   * @return {number}
+   */
+
   getStartIndex(): number {
     return this.startIndex;
   }
+
+
+
+  /**
+   * Set finish index
+   *
+   * @method
+   * @public
+   * @name setFinishIndex
+   * @param {number} index
+   * @return {void}
+   */
 
   setFinishIndex(index: number): void {
     if (index > this.images.length) {
@@ -778,17 +881,61 @@ export default class SequenceCanvas {
     this.finishIndex = index;
   }
 
+
+
+  /**
+   * Get finish index
+   *
+   * @method
+   * @public
+   * @name getFinishIndex
+   * @return {number}
+   */
+
   getFinishIndex(): number {
     return this.finishIndex;
   }
+
+
+
+  /**
+   * Enable logging
+   *
+   * @method
+   * @public
+   * @name enableLogging
+   * @return {void}
+   */
 
   enableLogging(): void {
     this.logging = true;
   }
 
+
+
+  /**
+   * Disable logging
+   *
+   * @method
+   * @public
+   * @name disableLogging
+   * @return {void}
+   */
+
   disableLogging(): void {
     this.logging = false;
   }
+
+
+
+  /**
+   * Get logging
+   *
+   * @method
+   * @public
+   * @name getLogging
+   * @return {void}
+   */
 
   getLogging(): boolean {
     return this.logging;

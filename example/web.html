@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Module SequenceCanvas</title>
+    <title>Web - SequenceCanvas</title>
     <style>
         *, ::before, ::after {
             box-sizing: border-box;
@@ -18,104 +18,43 @@
 </head>
 <body>
 
-<!-- Canvas -->
-<canvas id="example"></canvas>
+    <!-- Canvas -->
 
-<script src="../lib/sequence-canvas.js"></script>
+    <canvas id="example"></canvas>
 
-<!-- Connection and usage -->
-<script>
-  function createPathImage(index) {
-    return `https://kranteh-pro.ru/wp-content/themes/base/assets/i/1/LKS_seq001_${index.toString().padStart(5, '0')}.webp`;
-  }
-  const arrayPathImages = [...new Array(100).fill('').map((_, i) => createPathImage(i))];
+    <!-- Connection -->
 
-  const canvas = new SequenceCanvas({
-    canvas: {
-      element: document.querySelector('canvas#example'),
-      width: 1920,
-      height: 950,
-    },
-    images: {
-      paths: arrayPathImages,
-      // options: {
-      //   size: {
-      //     width: 1920 / 2,
-      //     height: 950 / 2,
-      //   },
-      //   position: {
-      //     x: 1920 / 4,
-      //     y: 950 / 4
-      //   },
-      //   trim: {
-      //     x: 1420,
-      //     y: 50,
-      //     width: 500,
-      //     height: 950 - 50
-      //   }
-      // }
-    },
-    // direction: -1,
-    // fps: 10,
-    // loop: false,
-    // init: false,
-    // startIndex: 1,
-    // finishIndex: 98,
-    // startImmediately: true,
-    // startAfterLoaded: false
-    // logging: true,
-    // on: {
-    //   init: function(event) {
-    //     console.log('init', event);
-    //   }
-    //   load: function(event) {
-    //     console.log('load', event);
-    //   }
-    //   loaded: function(event) {
-    //     console.log('loaded', event);
-    //   }
-    //   render: function(event) {
-    //     console.log('render', event);
-    //   }
-    //   start: function(event) {
-    //     console.log('start', event);
-    //   }
-    //   play: function(event) {
-    //     console.log('play', event);
-    //   }
-    //   stop: function(event) {
-    //     console.log('stop', event);
-    //   }
-    //   pause: function(event) {
-    //     console.log('pause', event);
-    //   }
-    // }
-  });
+    <script src="../lib/sequence-canvas.js"></script>
 
-  // canvas.on('init', function(event) {
-  //   console.log('init', event);
-  // });
-  // canvas.on('load', function(event) {
-  //   console.log('load', event);
-  // });
-  // canvas.on('loaded', function(event) {
-  //   console.log('loaded', event);
-  // });
-  // canvas.on('render', function(event) {
-  //   console.log('render', event);
-  // });
-  // canvas.on('start', function(event) {
-  //   console.log('start', event);
-  // });
-  // canvas.on('play', function(event) {
-  //   console.log('play', event);
-  // });
-  // canvas.on('stop', function(event) {
-  //   console.log('stop', event);
-  // });
-  // canvas.on('pause', function(event) {
-  //   console.log('pause', event);
-  // });
-</script>
+    <!-- Usage -->
+
+    <script>
+
+      function createPathImage(index) {
+        return `https://kranteh-pro.ru/wp-content/themes/base/assets/i/1/LKS_seq001_${index.toString().padStart(5, '0')}.webp`;
+      }
+      const arrayPathImages = [...new Array(100).fill('').map((_, i) => createPathImage(i))];
+
+      const canvas = new SequenceCanvas({
+        canvas: {
+          element: document.querySelector('canvas#example'),
+          width: 1920,
+          height: 950,
+        },
+        images: {
+          paths: arrayPathImages,
+        },
+        on: {
+          loaded: function(event) {
+            console.log('loaded', event);
+          }
+        }
+      });
+      canvas.on('start', function(event) {
+        console.log('start', event);
+      });
+
+    </script>
+
 </body>
 </html>
