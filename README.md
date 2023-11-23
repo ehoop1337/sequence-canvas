@@ -38,32 +38,32 @@ Frame-by-frame reproduction of images in HTML Canvas
 
 `Optional`
 
-| Option | Type | Default | Description |
-| ------ | ------ | ------ | ------ |
-| canvas.width | number |  |  |
-| canvas.height | number |  |  |
-| images.options | object |  |  |
-| images.options.position | object |  |  |
-| images.options.position.x | number |  |  |
-| images.options.position.y | number |  |  |
-| images.options.trim | object |  |  |
-| images.options.trim.x | number |  |  |
-| images.options.trim.y | number |  |  |
-| images.options.trim.width | number |  |  |
-| images.options.trim.height | number |  |  |
-| images.options.size | object |  |  |
-| images.options.size.width | number |  |  |
-| images.options.size.height | number |  |  |
-| init | boolean | true |  |
-| direction | 1 \| -1 | 1 |  |
-| loop | boolean | true |  |
-| fps | 1 ... 60 | 60 |  |
-| startIndex | number | 0 |  |
-| finishIndex | number | inages.length - 1 |  |
-| currentIndex | number | 0 |  |
-| startImmediately | boolean | false |  |
-| startAfterLoaded | boolean | true |  |
-| logging | boolean | false |  |
+| Option | Type | Default           | Description |
+| ------ | ------ |-------------------| ------ |
+| canvas.width | number |                   |  |
+| canvas.height | number |                   |  |
+| images.options | object |                   |  |
+| images.options.position | object |                   |  |
+| images.options.position.x | number |                   |  |
+| images.options.position.y | number |                   |  |
+| images.options.trim | object |                   |  |
+| images.options.trim.x | number |                   |  |
+| images.options.trim.y | number |                   |  |
+| images.options.trim.width | number |                   |  |
+| images.options.trim.height | number |                   |  |
+| images.options.size | object |                   |  |
+| images.options.size.width | number |                   |  |
+| images.options.size.height | number |                   |  |
+| init | boolean | true              |  |
+| direction | 1 \| -1                | 1 |  |
+| loop | boolean | true              |  |
+| fps | 1 ... 60 | 60                |  |
+| startIndex | number | 0                 |  |
+| finishIndex | number | images.length - 1 |  |
+| currentIndex | number | 0                 |  |
+| startImmediately | boolean | false             |  |
+| startAfterLoaded | boolean | true              |  |
+| logging | boolean | false             |  |
 
 ## Methods
 | Method | Description |
