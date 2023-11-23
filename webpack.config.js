@@ -4,6 +4,7 @@ module.exports = {
   context: path.resolve('src'),
   mode: 'production',
   entry: './index.ts',
+  devtool: 'source-map',
   module: {
     rules: [
       {
