@@ -2,21 +2,27 @@
 Frame-by-frame reproduction of images in HTML Canvas
 
 ## Installation
+
+#### Package Managers
 ```sh
-    npm install sequence-canvas@0.1.0
+    npm install sequence-canvas
 ```
 ```javascript
     import SequenceCanvas from 'sequence-canvas';
-```
-```javascript
+    
     const canvas = new SequenceCanvas({
-        canvas: {
-            element: document.querySelector('canvas')
-        },
-        images: {
-            paths: arrayPathImages
-        }
+      // settings
     });
+```
+
+#### Loading js file
+```html
+    <script src="sequence-canvas.js"></script>
+    <script>
+        const canvas = new SequenceCanvas({
+            // settings
+        });
+    </script>
 ```
 
 ## Settings
@@ -59,7 +65,7 @@ Frame-by-frame reproduction of images in HTML Canvas
 | startAfterLoaded | boolean | true |  |
 | logging | boolean | false |  |
 
-## Methods
+## Usage of methods
 | Method | Description |
 | ------ | ------ |
 | start |  |
@@ -67,11 +73,16 @@ Frame-by-frame reproduction of images in HTML Canvas
 | pause |  |
 | stop |  |
 
+## Usage of methods
 ```javascript
+const canvas = new SequenceCanvas({
+  ...
+})
+...
 canvas.pause();
 ```
 
-## Events
+## Usage of events
 
 | Event | Description |
 | ------ | ------ |
@@ -85,6 +96,10 @@ canvas.pause();
 | stop |  |
 
 ```javascript
+const canvas = new SequenceCanvas({
+  ...
+})
+...
 canvas.on('pause', function() {
     console.log('paused');
 })

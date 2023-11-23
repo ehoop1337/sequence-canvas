@@ -1,8 +1,8 @@
-type StateImageSequenceCanvas = 'WAIT' | 'LOADING' | 'LOADED' | 'ERROR';
-type DirectionSequenceCanvas = -1 | 1;
-type EventSequenceCanvas = 'init' | 'load' | 'loaded' | 'render' | 'start' | 'play' | 'stop' | 'pause';
+export type StateImageSequenceCanvas = 'WAIT' | 'LOADING' | 'LOADED' | 'ERROR';
+export type DirectionSequenceCanvas = -1 | 1;
+export type EventSequenceCanvas = 'init' | 'load' | 'loaded' | 'render' | 'start' | 'play' | 'stop' | 'pause';
 
-interface SettingsSequenceCanvas {
+export interface SettingsSequenceCanvas {
   canvas: {
     element: HTMLCanvasElement;
     width?: number;
@@ -38,7 +38,8 @@ interface SettingsSequenceCanvas {
   startAfterLoaded?: boolean;
   logging?: boolean;
 }
-interface ImageSequenceCanvas {
+
+export interface ImageSequenceCanvas {
   path: string;
   state: StateImageSequenceCanvas;
   image?: HTMLImageElement;
