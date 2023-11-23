@@ -90,7 +90,6 @@ Frame-by-frame reproduction of images in HTML Canvas
 | getStartIndex   |  |
 | setFinishIndex  |  |
 | getFinishIndex  |  |
-| setLogging      |  |
 | getLogging      |  |
 | enableLogging   |  |
 | disableLogging  |  |
