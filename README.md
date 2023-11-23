@@ -66,20 +66,42 @@ Frame-by-frame reproduction of images in HTML Canvas
 | logging | boolean | false             |  |
 
 ## Methods
-| Method | Description |
-| ------ | ------ |
-| start |  |
-| play |  |
-| pause |  |
-| stop |  |
+| Method          | Description |
+|-----------------| ------ |
+| start           |  |
+| play            |  |
+| pause           |  |
+| stop            |  |
+| on              |  |
+| off             |  |
+| setCurrentImage |  |
+| getCurrentImage |  |
+| setSizesCanvas  |  |
+| getSizesCanvas  |  |
+| setImageOptions |  |
+| getImageOptions |  |
+| setFps          |  |
+| getFps          |  |
+| setDirection    |  |
+| getDirection    |  |
+| setLoop         |  |
+| getLoop         |  |
+| setStartIndex   |  |
+| getStartIndex   |  |
+| setFinishIndex  |  |
+| getFinishIndex  |  |
+| setLogging      |  |
+| getLogging      |  |
+| enableLogging   |  |
+| disableLogging  |  |
 
 #### Usage of methods
 
 ```javascript
 const canvas = new SequenceCanvas({
-  ...
+  // ...
 })
-...
+//...
 canvas.pause();
 ```
 
@@ -100,12 +122,14 @@ canvas.pause();
 
 ```javascript
 const canvas = new SequenceCanvas({
-  ...
-})
-...
-canvas.on('pause', function() {
-    console.log('paused');
-})
+  // ...
+});
+// ...
+function pauseHandler() {
+  console.log('pause');
+}
+canvas.on('pause', pauseHandler);
+canvas.off('pause', pauseHandler);
 ```
 
 ## Authors

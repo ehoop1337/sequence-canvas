@@ -31,27 +31,27 @@
   const arrayPathImages = [...new Array(100).fill('').map((_, i) => createPathImage(i))];
 
   const canvas = new SequenceCanvas({
-    canvas: { // Required
-      element: document.querySelector('canvas#example'), // Required
-      width: 1920, // Optional - width canvas
-      height: 950, // Optional - height canvas
+    canvas: {
+      element: document.querySelector('canvas#example'),
+      width: 1920,
+      height: 950,
     },
-    images: { // Required
-      paths: arrayPathImages, // Required - array of image paths
-      // options: { // Optional - options images
-      //   size: { // Optional - Size images
-      //     width: 1920 / 2, // Required - width images
-      //     height: 950 / 2, // Required - height images
+    images: {
+      paths: arrayPathImages,
+      // options: {
+      //   size: {
+      //     width: 1920 / 2,
+      //     height: 950 / 2,
       //   },
-      //   position: { // Optional - Position images
-      //     x: 1920 / 4, // Required - x position images
-      //     y: 950 / 4 // Required - y position images
+      //   position: {
+      //     x: 1920 / 4,
+      //     y: 950 / 4
       //   },
-      //   trim: { // Optional - trim images
-      //     x: 1420, // Required - x trim images
-      //     y: 50, // Required - y trim images
-      //     width: 500, // Required - width trim images
-      //     height: 950 - 50 // Required - height trim images
+      //   trim: {
+      //     x: 1420,
+      //     y: 50,
+      //     width: 500,
+      //     height: 950 - 50
       //   }
       // }
     },
@@ -63,31 +63,58 @@
     // finishIndex: 98,
     // startImmediately: true,
     // startAfterLoaded: false
-    // logging: true
+    // logging: true,
+    // on: {
+    //   init: function(event) {
+    //     console.log('init', event);
+    //   }
+    //   load: function(event) {
+    //     console.log('load', event);
+    //   }
+    //   loaded: function(event) {
+    //     console.log('loaded', event);
+    //   }
+    //   render: function(event) {
+    //     console.log('render', event);
+    //   }
+    //   start: function(event) {
+    //     console.log('start', event);
+    //   }
+    //   play: function(event) {
+    //     console.log('play', event);
+    //   }
+    //   stop: function(event) {
+    //     console.log('stop', event);
+    //   }
+    //   pause: function(event) {
+    //     console.log('pause', event);
+    //   }
+    // }
   });
+
   // canvas.on('init', function(event) {
-  //   console.log('Init sequence canvas', event);
+  //   console.log('init', event);
   // });
   // canvas.on('load', function(event) {
-  //   console.log('Load image', event);
+  //   console.log('load', event);
   // });
   // canvas.on('loaded', function(event) {
-  //   console.log('Loaded images', event);
+  //   console.log('loaded', event);
   // });
   // canvas.on('render', function(event) {
-  //   console.log('Render image', event);
+  //   console.log('render', event);
   // });
   // canvas.on('start', function(event) {
-  //   console.log('Start render', event);
+  //   console.log('start', event);
   // });
   // canvas.on('play', function(event) {
-  //   console.log('Play render', event);
+  //   console.log('play', event);
   // });
   // canvas.on('stop', function(event) {
-  //   console.log('Stop render', event);
+  //   console.log('stop', event);
   // });
   // canvas.on('pause', function(event) {
-  //   console.log('Pause render', event);
+  //   console.log('pause', event);
   // });
 </script>
 </body>

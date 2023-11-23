@@ -1,6 +1,38 @@
 export type StateImageSequenceCanvas = 'WAIT' | 'LOADING' | 'LOADED' | 'ERROR';
 export type DirectionSequenceCanvas = -1 | 1;
 export type EventSequenceCanvas = 'init' | 'load' | 'loaded' | 'render' | 'start' | 'play' | 'stop' | 'pause';
+export interface ImageOptionsSequenceCanvas {
+    position?: {
+        x: number;
+        y: number;
+    };
+    trim?: {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+    };
+    size?: {
+        width: number;
+        height: number;
+    };
+}
+export interface ReturnImageOptionsSequenceCanvas {
+    position: {
+        x: number;
+        y: number;
+    };
+    trim: {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+    };
+    size: {
+        width: number;
+        height: number;
+    };
+}
 export interface SettingsSequenceCanvas {
     canvas: {
         element: HTMLCanvasElement;
@@ -9,22 +41,7 @@ export interface SettingsSequenceCanvas {
     };
     images: {
         paths: Array<string>;
-        options?: {
-            position?: {
-                x: number;
-                y: number;
-            };
-            trim?: {
-                x: number;
-                y: number;
-                width: number;
-                height: number;
-            };
-            size?: {
-                width: number;
-                height: number;
-            };
-        };
+        options?: ImageOptionsSequenceCanvas;
     };
     init?: boolean;
     direction?: DirectionSequenceCanvas;
@@ -36,6 +53,7 @@ export interface SettingsSequenceCanvas {
     startImmediately?: boolean;
     startAfterLoaded?: boolean;
     logging?: boolean;
+    on?: any;
 }
 export interface ImageSequenceCanvas {
     path: string;
@@ -49,38 +67,84 @@ export interface ImageSequenceCanvas {
  */
 export default class SequenceCanvas {
     #private;
-    canvas: HTMLCanvasElement;
-    context: CanvasRenderingContext2D;
-    heightCanvas: number;
-    widthCanvas: number;
-    images: Array<ImageSequenceCanvas>;
-    isPositionImages: boolean;
-    xPosImages: number;
-    yPosImages: number;
-    isSizeImages: boolean;
-    widthImages: number;
-    heightImages: number;
-    isTrimImages: boolean;
-    xTrimImages: number;
-    yTrimImages: number;
-    widthTrimImages: number;
-    heightTrimImages: number;
-    fps: number;
-    direction: DirectionSequenceCanvas;
-    loop: boolean;
-    startIndex: number;
-    finishIndex: number;
-    currentIndex: number;
-    startImmediately: boolean;
-    startAfterLoaded: boolean;
-    initiate: boolean;
-    logging: boolean;
+    readonly canvas: HTMLCanvasElement;
+    readonly context: CanvasRenderingContext2D;
+    private heightCanvas;
+    private widthCanvas;
+    private readonly images;
+    private isPositionImages;
+    private xPosImages;
+    private yPosImages;
+    private isSizeImages;
+    private widthImages;
+    private heightImages;
+    private isTrimImages;
+    private xTrimImages;
+    private yTrimImages;
+    private widthTrimImages;
+    private heightTrimImages;
+    private fps;
+    private direction;
+    private loop;
+    private startIndex;
+    private finishIndex;
+    private currentIndex;
+    private readonly startImmediately;
+    private readonly startAfterLoaded;
+    private readonly initiate;
+    private logging;
+    private rendering;
+    private requestId;
+    private fpsInterval;
+    private now;
+    private then;
+    private startTime;
+    private elapsed;
+    private events;
     /**
      * Create a point.
      * @constructor
      * @param {SettingsSequenceCanvas} settings - Settings for creating a new instance
      */
     constructor(settings: SettingsSequenceCanvas);
+    /**
+     * This method loads the image by index.
+     *
+     * @method
+     * @private
+     * @name this.#loadImage
+     * @param {number} index Index of element in image array.
+     * @return {void}
+     */
+    private loadImage;
+    /**
+     * Changing the rendering flag.
+     *
+     * @method
+     * @private
+     * @name this.#setRendering
+     * @param {boolean} isRendering
+     * @return {void}
+     */
+    private setRendering;
+    /**
+     * The method starts the rendering loop
+     *
+     * @method
+     * @private
+     * @name this.#startRender
+     * @return {void}
+     */
+    private startRender;
+    /**
+     * Logic for changing images
+     *
+     * @method
+     * @private
+     * @name logic
+     * @return {void}
+     */
+    private logic;
     /**
      * Drawing an image by index
      *
@@ -109,15 +173,6 @@ export default class SequenceCanvas {
      * @return {boolean}
      */
     isLoadedFrames(): boolean;
-    /**
-     * The method checks whether at least one image had a problem loading
-     *
-     * @method
-     * @public
-     * @name isErrorLoadFrames
-     * @return {boolean}
-     */
-    isErrorLoadFrames(): boolean;
     /**
      * Start rendering from the starting image
      *
@@ -155,6 +210,38 @@ export default class SequenceCanvas {
      */
     pause(): void;
     /**
+     * Add listeners before initialization
+     *
+     * @method
+     * @private
+     * @name addListenersBeforeInitialization
+     * @param {any} listeners
+     * @return {void}
+     */
+    private addListenersBeforeInitialization;
+    /**
+     * Attaches a listener to an event
+     *
+     * @method
+     * @public
+     * @name on
+     * @param {EventSequenceCanvas} eventName
+     * @param {(event: CustomEvent) => void} callback
+     * @return {void}
+     */
+    on(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void): void;
+    /**
+     * Removing an event listener
+     *
+     * @method
+     * @public
+     * @name off
+     * @param {EventSequenceCanvas} eventName
+     * @param {(event: CustomEvent) => void} callback
+     * @return {void}
+     */
+    off(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void): void;
+    /**
      * Set current image
      *
      * @method
@@ -164,6 +251,15 @@ export default class SequenceCanvas {
      * @return {void}
      */
     setCurrentImage(indexImage: number): void;
+    /**
+     * Get current image
+     *
+     * @method
+     * @public
+     * @name getCurrentImage
+     * @return {number}
+     */
+    getCurrentImage(): number;
     /**
      * The method sets the size of the canvas
      *
@@ -177,5 +273,48 @@ export default class SequenceCanvas {
         width?: number;
         height?: number;
     }): void;
-    on(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void): void;
+    /**
+     * The method gets the size of the canvas
+     *
+     * @method
+     * @public
+     * @name getSizesCanvas
+     * @return {{width: number, height: number}}
+     */
+    getSizesCanvas(): {
+        width: number;
+        height: number;
+    };
+    /**
+     * Setting image options
+     *
+     * @method
+     * @public
+     * @name setImageOptions
+     * @param {ImageOptionsSequenceCanvas} options
+     * @return {void}
+     */
+    setImageOptions(options: ImageOptionsSequenceCanvas): void;
+    /**
+     * Getting image settings
+     *
+     * @method
+     * @public
+     * @name getImageSettings
+     * @return {ReturnImageOptionsSequenceCanvas}
+     */
+    getImageSettings(): ReturnImageOptionsSequenceCanvas;
+    setFps(value: number): void;
+    getFps(): number;
+    setDirection(value: DirectionSequenceCanvas): void;
+    getDirection(): DirectionSequenceCanvas;
+    setLoop(value: boolean): void;
+    getLoop(): boolean;
+    setStartIndex(index: number): void;
+    getStartIndex(): number;
+    setFinishIndex(index: number): void;
+    getFinishIndex(): number;
+    enableLogging(): void;
+    disableLogging(): void;
+    getLogging(): boolean;
 }

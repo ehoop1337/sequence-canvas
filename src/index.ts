@@ -1,7 +1,38 @@
 export type StateImageSequenceCanvas = 'WAIT' | 'LOADING' | 'LOADED' | 'ERROR';
 export type DirectionSequenceCanvas = -1 | 1;
 export type EventSequenceCanvas = 'init' | 'load' | 'loaded' | 'render' | 'start' | 'play' | 'stop' | 'pause';
-
+export interface ImageOptionsSequenceCanvas {
+  position?: {
+    x: number;
+    y: number;
+  }
+  trim?: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }
+  size?: {
+    width: number;
+    height: number;
+  }
+}
+export interface ReturnImageOptionsSequenceCanvas {
+  position: {
+    x: number;
+    y: number;
+  }
+  trim: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }
+  size: {
+    width: number;
+    height: number;
+  }
+}
 export interface SettingsSequenceCanvas {
   canvas: {
     element: HTMLCanvasElement;
@@ -10,22 +41,7 @@ export interface SettingsSequenceCanvas {
   };
   images: {
     paths: Array<string>;
-    options?: {
-      position?: {
-        x: number;
-        y: number;
-      }
-      trim?: {
-        x: number;
-        y: number;
-        width: number;
-        height: number;
-      }
-      size?: {
-        width: number;
-        height: number;
-      }
-    }
+    options?: ImageOptionsSequenceCanvas
   };
   init?: boolean;
   direction?: DirectionSequenceCanvas
@@ -37,13 +53,15 @@ export interface SettingsSequenceCanvas {
   startImmediately?: boolean;
   startAfterLoaded?: boolean;
   logging?: boolean;
+  on?: any;
 }
-
 export interface ImageSequenceCanvas {
   path: string;
   state: StateImageSequenceCanvas;
   image?: HTMLImageElement;
 }
+
+
 
 /**
  * Creates a new sequence canvas.
@@ -53,57 +71,59 @@ export interface ImageSequenceCanvas {
 
 export default class SequenceCanvas {
   // Canvas
-  canvas: HTMLCanvasElement = undefined;
-  context: CanvasRenderingContext2D = undefined;
-  heightCanvas: number = undefined;
-  widthCanvas: number = undefined;
+  public readonly canvas: HTMLCanvasElement = undefined;
+  public readonly context: CanvasRenderingContext2D = undefined;
+  private heightCanvas: number = undefined;
+  private widthCanvas: number = undefined;
 
   // Images
-  images: Array<ImageSequenceCanvas> = undefined;
-  isPositionImages: boolean = undefined;
-  xPosImages: number = undefined;
-  yPosImages: number = undefined;
-  isSizeImages: boolean = undefined;
-  widthImages: number = undefined;
-  heightImages: number = undefined;
-  isTrimImages: boolean = undefined;
-  xTrimImages: number = undefined;
-  yTrimImages: number = undefined;
-  widthTrimImages: number = undefined;
-  heightTrimImages: number = undefined;
+  private readonly images: Array<ImageSequenceCanvas> = undefined;
+  private isPositionImages: boolean = undefined;
+  private xPosImages: number = undefined;
+  private yPosImages: number = undefined;
+  private isSizeImages: boolean = undefined;
+  private widthImages: number = undefined;
+  private heightImages: number = undefined;
+  private isTrimImages: boolean = undefined;
+  private xTrimImages: number = undefined;
+  private yTrimImages: number = undefined;
+  private widthTrimImages: number = undefined;
+  private heightTrimImages: number = undefined;
 
   // Optional
-  fps: number = undefined;
-  direction: DirectionSequenceCanvas = undefined;
-  loop: boolean = undefined;
-  startIndex: number = undefined;
-  finishIndex: number = undefined;
-  currentIndex: number = undefined;
-  startImmediately: boolean = undefined;
-  startAfterLoaded: boolean = undefined;
-  initiate: boolean = false;
-  logging: boolean = false;
+  private fps: number = undefined;
+  private direction: DirectionSequenceCanvas = undefined;
+  private loop: boolean = undefined;
+  private startIndex: number = undefined;
+  private finishIndex: number = undefined;
+  private currentIndex: number = undefined;
+  private readonly startImmediately: boolean = undefined;
+  private readonly startAfterLoaded: boolean = undefined;
+  private readonly initiate: boolean = false;
+  private logging: boolean = false;
 
   // Domestic
-  #rendering: boolean = false;
-  #requestId: number;
-  #fpsInterval: number;
-  #now: number;
-  #then: number;
-  #startTime: number;
-  #elapsed: number;
+  private rendering: boolean = false;
+  private requestId: number;
+  private fpsInterval: number;
+  private now: number;
+  private then: number;
+  private startTime: number;
+  private elapsed: number;
 
   // Events
-  #events = {
-    init: new Event('init', {bubbles: true}),
-    load: new Event('load', {bubbles: true}),
-    loaded: new Event('loaded', {bubbles: true}),
-    render: new Event('render', {bubbles: true}),
-    start: new Event('start', {bubbles: true}),
-    play: new Event('play', {bubbles: true}),
-    stop: new Event('stop', {bubbles: true}),
-    pause: new Event('pause', {bubbles: true}),
+  private events = {
+    init: new CustomEvent('init', {bubbles: true}),
+    load: new CustomEvent('load', {bubbles: true}),
+    loaded: new CustomEvent('loaded', {bubbles: true}),
+    render: new CustomEvent('render', {bubbles: true}),
+    start: new CustomEvent('start', {bubbles: true}),
+    play: new CustomEvent('play', {bubbles: true}),
+    stop: new CustomEvent('stop', {bubbles: true}),
+    pause: new CustomEvent('pause', {bubbles: true}),
   }
+
+
 
   /**
    * Create a point.
@@ -146,10 +166,16 @@ export default class SequenceCanvas {
     this.initiate = settings.init ?? true;
     this.logging = settings.logging ?? false;
 
+    if (settings.on) {
+      this.addListenersBeforeInitialization(settings.on);
+    }
+
     if (this.initiate) {
       this.init();
     }
   }
+
+
 
   /**
    * This method loads the image by index.
@@ -161,17 +187,17 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  #loadImage(index: number): void {
+  private loadImage(index: number): void {
     this.images[index].state = 'LOADING';
-    this.canvas.dispatchEvent(this.#events.load);
+    this.canvas.dispatchEvent(this.events.load);
     const img = new Image();
     img.src = this.images[index].path;
     img.onload = () => {
       this.images[index].state = 'LOADED';
       this.images[index].image = img;
-      this.canvas.dispatchEvent(this.#events.loaded);
+      this.canvas.dispatchEvent(this.events.loaded);
       if (
-        !this.#rendering &&
+        !this.rendering &&
         (
           this.startImmediately ||
           this.startAfterLoaded &&
@@ -186,6 +212,8 @@ export default class SequenceCanvas {
     };
   }
 
+
+
   /**
    * Changing the rendering flag.
    *
@@ -196,9 +224,11 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  #setRendering(isRendering: boolean): void {
-    this.#rendering = isRendering;
+  private setRendering(isRendering: boolean): void {
+    this.rendering = isRendering;
   }
+
+
 
   /**
    * The method starts the rendering loop
@@ -209,14 +239,16 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  #startRender(): void {
-    this.#setRendering(true);
+  private startRender(): void {
+    this.setRendering(true);
     this.drawImage(this.currentIndex);
-    this.#fpsInterval = 1000 / this.fps;
-    this.#then = Date.now();
-    this.#startTime = this.#then;
+    this.fpsInterval = 1000 / this.fps;
+    this.then = Date.now();
+    this.startTime = this.then;
     this.#render();
   }
+
+
 
   /**
    * The method is loop rendering.
@@ -228,29 +260,31 @@ export default class SequenceCanvas {
    */
 
   #render = (): void => {
-    if (!this.#rendering) {
-      if (this.#requestId) cancelAnimationFrame(this.#requestId);
+    if (!this.rendering) {
+      if (this.requestId) cancelAnimationFrame(this.requestId);
       return;
     }
-    this.#requestId = requestAnimationFrame(this.#render);
-    this.#now = Date.now();
-    this.#elapsed = this.#now - this.#then;
-    if (this.#elapsed > this.#fpsInterval) {
-      this.#then = this.#now - (this.#elapsed % this.#fpsInterval);
-      this.#logic();
+    this.requestId = requestAnimationFrame(this.#render);
+    this.now = Date.now();
+    this.elapsed = this.now - this.then;
+    if (this.elapsed > this.fpsInterval) {
+      this.then = this.now - (this.elapsed % this.fpsInterval);
+      this.logic();
     }
   }
+
+
 
   /**
    * Logic for changing images
    *
    * @method
    * @private
-   * @name this.#logic
+   * @name logic
    * @return {void}
    */
 
-  #logic() {
+  private logic(): void {
     if (this.direction > 0) {
       if (this.loop) {
         if (this.currentIndex === this.finishIndex) {
@@ -260,7 +294,7 @@ export default class SequenceCanvas {
         }
       } else {
         if (this.currentIndex === this.finishIndex) {
-          this.#setRendering(false);
+          this.setRendering(false);
         } else {
           this.setCurrentImage(this.currentIndex + 1)
         }
@@ -274,7 +308,7 @@ export default class SequenceCanvas {
         }
       } else {
         if (this.currentIndex === this.startIndex) {
-          this.#setRendering(false);
+          this.setRendering(false);
         } else {
           this.setCurrentImage(this.currentIndex - 1)
         }
@@ -282,6 +316,8 @@ export default class SequenceCanvas {
     }
     this.drawImage(this.currentIndex);
   }
+
+
 
   /**
    * Drawing an image by index
@@ -293,14 +329,14 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  drawImage(indexImage: number): void {
+  public drawImage(indexImage: number): void {
     if (this.images[indexImage].state !== 'LOADED' || !this.images[indexImage].image) {
       if (this.logging) console.log('not rendered', indexImage, this.images[indexImage]);
       return;
     }
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.logging) console.log('rendered:', indexImage, this.images[indexImage]);
-    this.canvas.dispatchEvent(this.#events.render);
+    this.canvas.dispatchEvent(this.events.render);
 
     if (this.isTrimImages) {
       if (this.isSizeImages && this.isPositionImages) {
@@ -402,6 +438,8 @@ export default class SequenceCanvas {
     );
   }
 
+
+
   /**
    * Initializing canvas and image array (possibly downloading them)
    *
@@ -411,13 +449,15 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  init(): void {
-    this.canvas.dispatchEvent(this.#events.init);
+  public init(): void {
+    this.canvas.dispatchEvent(this.events.init);
     this.setSizesCanvas({width: this.widthCanvas, height: this.heightCanvas});
     this.images.forEach((_, index) => {
-      this.#loadImage(index);
+      this.loadImage(index);
     })
   }
+
+
 
   /**
    * This method checks if all images are loaded
@@ -428,22 +468,11 @@ export default class SequenceCanvas {
    * @return {boolean}
    */
 
-  isLoadedFrames(): boolean {
+  public isLoadedFrames(): boolean {
     return this.images.every(img => img.state === "LOADED")
   }
 
-  /**
-   * The method checks whether at least one image had a problem loading
-   *
-   * @method
-   * @public
-   * @name isErrorLoadFrames
-   * @return {boolean}
-   */
 
-  isErrorLoadFrames(): boolean {
-    return this.images.some(img => img.state === "ERROR")
-  }
 
   /**
    * Start rendering from the starting image
@@ -454,11 +483,13 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  start(): void {
+  public start(): void {
     this.currentIndex = this.startIndex;
-    this.canvas.dispatchEvent(this.#events.start);
-    this.#startRender();
+    this.canvas.dispatchEvent(this.events.start);
+    this.startRender();
   }
+
+
 
   /**
    * Start rendering from the current image
@@ -470,10 +501,12 @@ export default class SequenceCanvas {
    */
 
   // Запуск рендеринга
-  play(): void {
-    this.canvas.dispatchEvent(this.#events.play);
-    this.#startRender();
+  public play(): void {
+    this.canvas.dispatchEvent(this.events.play);
+    this.startRender();
   }
+
+
 
   /**
    * Pausing rendering and displaying the initial image
@@ -484,11 +517,13 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  stop(): void {
-    this.canvas.dispatchEvent(this.#events.stop);
-    this.#setRendering(false);
+  public stop(): void {
+    this.canvas.dispatchEvent(this.events.stop);
+    this.setRendering(false);
     this.setCurrentImage(this.startIndex);
   }
+
+
 
   /**
    * Pause rendering
@@ -499,10 +534,66 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  pause() {
-    this.canvas.dispatchEvent(this.#events.pause);
-    this.#setRendering(false);
+  public pause() {
+    this.canvas.dispatchEvent(this.events.pause);
+    this.setRendering(false);
   }
+
+
+
+  /**
+   * Add listeners before initialization
+   *
+   * @method
+   * @private
+   * @name addListenersBeforeInitialization
+   * @param {any} listeners
+   * @return {void}
+   */
+
+  private addListenersBeforeInitialization = (listeners: any): void => {
+    if (listeners) {
+      for (let key in listeners) {
+        this.canvas.addEventListener(key, listeners[key].bind(this));
+      }
+    }
+  }
+
+
+
+  /**
+   * Attaches a listener to an event
+   *
+   * @method
+   * @public
+   * @name on
+   * @param {EventSequenceCanvas} eventName
+   * @param {(event: CustomEvent) => void} callback
+   * @return {void}
+   */
+
+  public on(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void): void {
+    this.canvas.addEventListener(eventName, callback.bind(this));
+  }
+
+
+
+  /**
+   * Removing an event listener
+   *
+   * @method
+   * @public
+   * @name off
+   * @param {EventSequenceCanvas} eventName
+   * @param {(event: CustomEvent) => void} callback
+   * @return {void}
+   */
+
+  public off(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void): void {
+    this.canvas.removeEventListener(eventName, callback.bind(this));
+  }
+
+
 
   /**
    * Set current image
@@ -514,9 +605,26 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  setCurrentImage(indexImage: number): void {
+  public setCurrentImage(indexImage: number): void {
     this.currentIndex = indexImage;
   }
+
+
+
+  /**
+   * Get current image
+   *
+   * @method
+   * @public
+   * @name getCurrentImage
+   * @return {number}
+   */
+
+  public getCurrentImage(): number {
+    return this.currentIndex;
+  }
+
+
 
   /**
    * The method sets the size of the canvas
@@ -528,7 +636,7 @@ export default class SequenceCanvas {
    * @return {void}
    */
 
-  setSizesCanvas(sizes: {width?: number; height?: number}) {
+  public setSizesCanvas(sizes: {width?: number; height?: number}) {
     if (sizes.width) {
       this.canvas.width = sizes.width;
       this.widthCanvas = sizes.width;
@@ -543,7 +651,146 @@ export default class SequenceCanvas {
     }
   }
 
-  on(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void) {
-    this.canvas.addEventListener(eventName, callback.bind(this));
+
+
+  /**
+   * The method gets the size of the canvas
+   *
+   * @method
+   * @public
+   * @name getSizesCanvas
+   * @return {{width: number, height: number}}
+   */
+
+  public getSizesCanvas() {
+    return {
+      width: this.widthCanvas,
+      height: this.heightCanvas,
+    }
+  }
+
+
+
+  /**
+   * Setting image options
+   *
+   * @method
+   * @public
+   * @name setImageOptions
+   * @param {ImageOptionsSequenceCanvas} options
+   * @return {void}
+   */
+
+  public setImageOptions(options: ImageOptionsSequenceCanvas) {
+    this.isPositionImages = options?.position !== undefined;
+    this.xPosImages = options.position?.x;
+    this.yPosImages = options.position?.y;
+    this.isSizeImages = options?.size !== undefined;
+    this.widthImages = options.size?.width;
+    this.heightImages = options.size?.height;
+    this.isTrimImages = options?.trim !== undefined;
+    this.xTrimImages = options.trim?.x;
+    this.yTrimImages = options.trim?.y;
+    this.widthTrimImages = options.trim?.width;
+    this.heightTrimImages = options.trim?.height;
+  }
+
+
+
+  /**
+   * Getting image settings
+   *
+   * @method
+   * @public
+   * @name getImageSettings
+   * @return {ReturnImageOptionsSequenceCanvas}
+   */
+
+  public getImageSettings(): ReturnImageOptionsSequenceCanvas {
+    return {
+      position: {
+        x: this.xPosImages,
+        y: this.yPosImages
+      },
+      trim: {
+        x: this.xTrimImages,
+        y: this.yTrimImages,
+        width: this.widthTrimImages,
+        height: this.heightTrimImages
+      },
+      size: {
+        width: this.widthImages,
+        height: this.heightImages
+      }
+    }
+  }
+
+
+  setFps(value: number): void {
+    this.fps = typeof value === 'number' && 60 >= value && value > 0 ? value : 60;
+  }
+
+  getFps(): number {
+    return this.fps;
+  }
+
+  setDirection(value: DirectionSequenceCanvas): void {
+    this.direction = value;
+  }
+
+  getDirection(): DirectionSequenceCanvas {
+    return this.direction
+  }
+
+  setLoop(value: boolean): void {
+    this.loop = value;
+  }
+
+  getLoop(): boolean {
+    return this.loop
+  }
+
+  setStartIndex(index: number): void {
+    if (index > this.images.length) {
+      this.startIndex = this.images.length;
+      return;
+    }
+    if (index < 0) {
+      this.startIndex = 0;
+      return;
+    }
+    this.startIndex = index;
+  }
+
+  getStartIndex(): number {
+    return this.startIndex;
+  }
+
+  setFinishIndex(index: number): void {
+    if (index > this.images.length) {
+      this.finishIndex = this.images.length;
+      return;
+    }
+    if (index < 0) {
+      this.finishIndex = 0;
+      return;
+    }
+    this.finishIndex = index;
+  }
+
+  getFinishIndex(): number {
+    return this.finishIndex;
+  }
+
+  enableLogging(): void {
+    this.logging = true;
+  }
+
+  disableLogging(): void {
+    this.logging = false;
+  }
+
+  getLogging(): boolean {
+    return this.logging;
   }
 }
