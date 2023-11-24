@@ -32,7 +32,7 @@ module.exports = {
       type: 'var',
       export: 'default',
     },
-    path: path.resolve(__dirname, 'lib'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'sequence-canvas.js'
   }
 }

@@ -19,18 +19,18 @@ export interface ImageOptionsSequenceCanvas {
 }
 export interface ReturnImageOptionsSequenceCanvas {
     position: {
-        x: number;
-        y: number;
+        x?: number;
+        y?: number;
     };
     trim: {
-        x: number;
-        y: number;
-        width: number;
-        height: number;
+        x?: number;
+        y?: number;
+        width?: number;
+        height?: number;
     };
     size: {
-        width: number;
-        height: number;
+        width?: number;
+        height?: number;
     };
 }
 export interface SettingsSequenceCanvas {
@@ -73,16 +73,16 @@ export default class SequenceCanvas {
     private widthCanvas;
     private readonly images;
     private isPositionImages;
-    private xPosImages;
-    private yPosImages;
+    private xPosImages?;
+    private yPosImages?;
     private isSizeImages;
-    private widthImages;
-    private heightImages;
+    private widthImages?;
+    private heightImages?;
     private isTrimImages;
-    private xTrimImages;
-    private yTrimImages;
-    private widthTrimImages;
-    private heightTrimImages;
+    private xTrimImages?;
+    private yTrimImages?;
+    private widthTrimImages?;
+    private heightTrimImages?;
     private fps;
     private direction;
     private loop;

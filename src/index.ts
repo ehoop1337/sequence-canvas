@@ -19,18 +19,18 @@ export interface ImageOptionsSequenceCanvas {
 }
 export interface ReturnImageOptionsSequenceCanvas {
   position: {
-    x: number;
-    y: number;
+    x?: number;
+    y?: number;
   }
   trim: {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
   }
   size: {
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
   }
 }
 export interface SettingsSequenceCanvas {
@@ -70,45 +70,45 @@ export interface ImageSequenceCanvas {
 
 export default class SequenceCanvas {
   // Canvas
-  public readonly canvas: HTMLCanvasElement = undefined;
-  public readonly context: CanvasRenderingContext2D = undefined;
-  private heightCanvas: number = undefined;
-  private widthCanvas: number = undefined;
+  public readonly canvas: HTMLCanvasElement;
+  public readonly context: CanvasRenderingContext2D;
+  private heightCanvas: number;
+  private widthCanvas: number;
 
   // Images
-  private readonly images: Array<ImageSequenceCanvas> = undefined;
-  private isPositionImages: boolean = undefined;
-  private xPosImages: number = undefined;
-  private yPosImages: number = undefined;
-  private isSizeImages: boolean = undefined;
-  private widthImages: number = undefined;
-  private heightImages: number = undefined;
-  private isTrimImages: boolean = undefined;
-  private xTrimImages: number = undefined;
-  private yTrimImages: number = undefined;
-  private widthTrimImages: number = undefined;
-  private heightTrimImages: number = undefined;
+  private readonly images: Array<ImageSequenceCanvas>;
+  private isPositionImages: boolean;
+  private xPosImages?: number;
+  private yPosImages?: number;
+  private isSizeImages: boolean;
+  private widthImages?: number;
+  private heightImages?: number;
+  private isTrimImages: boolean;
+  private xTrimImages?: number;
+  private yTrimImages?: number;
+  private widthTrimImages?: number;
+  private heightTrimImages?: number;
 
   // Optional
-  private fps: number = undefined;
-  private direction: DirectionSequenceCanvas = undefined;
-  private loop: boolean = undefined;
-  private startIndex: number = undefined;
-  private finishIndex: number = undefined;
-  private currentIndex: number = undefined;
-  private readonly startImmediately: boolean = undefined;
-  private readonly startAfterLoaded: boolean = undefined;
+  private fps: number;
+  private direction: DirectionSequenceCanvas;
+  private loop: boolean;
+  private startIndex: number;
+  private finishIndex: number;
+  private currentIndex: number;
+  private readonly startImmediately: boolean;
+  private readonly startAfterLoaded: boolean;
   private readonly initiate: boolean = false;
   private logging: boolean = false;
 
   // Domestic
   private rendering: boolean = false;
-  private requestId: number;
-  private fpsInterval: number;
-  private now: number;
-  private then: number;
-  private startTime: number;
-  private elapsed: number;
+  private requestId: number = 0;
+  private fpsInterval: number = 0;
+  private now: number = 0;
+  private then: number = 0;
+  private startTime: number = 0;
+  private elapsed: number = 0;
 
   // Events
   private events = {
@@ -133,9 +133,9 @@ export default class SequenceCanvas {
   constructor(settings: SettingsSequenceCanvas) {
     // Canvas
     this.canvas = settings.canvas.element;
-    this.context = this.canvas.getContext("2d");
-    this.widthCanvas = settings.canvas.width;
-    this.heightCanvas = settings.canvas.height;
+    this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
+    this.widthCanvas = settings.canvas.width || 0;
+    this.heightCanvas = settings.canvas.height || 0;
 
     // Images
     this.images = settings.images.paths.map((path) => {
@@ -341,56 +341,56 @@ export default class SequenceCanvas {
       if (this.isSizeImages && this.isPositionImages) {
         // trim + size + pos
         this.context.drawImage(
-          this.images[indexImage].image,
-          this.xTrimImages,
-          this.yTrimImages,
-          this.widthTrimImages,
-          this.heightTrimImages,
-          this.xPosImages,
-          this.yPosImages,
-          this.widthImages,
-          this.heightImages,
+          this.images[indexImage].image as HTMLImageElement,
+          this.xTrimImages as number,
+          this.yTrimImages as number,
+          this.widthTrimImages as number,
+          this.heightTrimImages as number,
+          this.xPosImages as number,
+          this.yPosImages as number,
+          this.widthImages as number,
+          this.heightImages as number,
         );
         return;
       } else if (this.isSizeImages) {
         // trim + size
         this.context.drawImage(
-          this.images[indexImage].image,
-          this.xTrimImages,
-          this.yTrimImages,
-          this.widthTrimImages,
-          this.heightTrimImages,
+          this.images[indexImage].image as HTMLImageElement,
+          this.xTrimImages as number,
+          this.yTrimImages as number,
+          this.widthTrimImages as number,
+          this.heightTrimImages as number,
           0,
           0,
-          this.widthImages,
-          this.heightImages,
+          this.widthImages as number,
+          this.heightImages as number,
         );
         return;
       } else if (this.isPositionImages) {
         // trim + pos
         this.context.drawImage(
-          this.images[indexImage].image,
-          this.xTrimImages,
-          this.yTrimImages,
+          this.images[indexImage].image as HTMLImageElement,
+          this.xTrimImages as number,
+          this.yTrimImages as number,
           this.widthCanvas,
           this.heightCanvas,
-          this.xPosImages,
-          this.yPosImages,
-          this.widthImages,
-          this.heightImages,
+          this.xPosImages as number,
+          this.yPosImages as number,
+          this.widthImages as number,
+          this.heightImages as number,
         );
       } else {
         // trim
         this.context.drawImage(
-          this.images[indexImage].image,
-          this.xTrimImages,
-          this.yTrimImages,
+          this.images[indexImage].image as HTMLImageElement,
+          this.xTrimImages as number,
+          this.yTrimImages as number,
           this.widthCanvas,
           this.heightCanvas,
           0,
           0,
-          this.widthImages,
-          this.heightImages,
+          this.widthImages as number,
+          this.heightImages as number,
         );
       }
     }
@@ -399,21 +399,21 @@ export default class SequenceCanvas {
       if (this.isPositionImages) {
         // size + pos
         this.context.drawImage(
-          this.images[indexImage].image,
-          this.xPosImages,
-          this.yPosImages,
-          this.widthImages,
-          this.heightImages,
+          this.images[indexImage].image as HTMLImageElement,
+          this.xPosImages as number,
+          this.yPosImages as number,
+          this.widthImages as number,
+          this.heightImages as number,
         );
         return;
       } else {
         // size
         this.context.drawImage(
-          this.images[indexImage].image,
+          this.images[indexImage].image as HTMLImageElement,
           0,
           0,
-          this.widthImages,
-          this.heightImages,
+          this.widthImages as number,
+          this.heightImages as number,
         );
         return;
       }
@@ -422,16 +422,16 @@ export default class SequenceCanvas {
     if (this.isPositionImages) {
       // pos
       this.context.drawImage(
-        this.images[indexImage].image,
-        this.xPosImages,
-        this.yPosImages,
+        this.images[indexImage].image as HTMLImageElement,
+        this.xPosImages as number,
+        this.yPosImages as number,
       );
       return;
     }
 
     // default
     this.context.drawImage(
-      this.images[indexImage].image,
+      this.images[indexImage].image as HTMLImageElement,
       0,
       0,
     );
@@ -572,7 +572,7 @@ export default class SequenceCanvas {
    */
 
   public on(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void): void {
-    this.canvas.addEventListener(eventName, callback.bind(this));
+    this.canvas.addEventListener(eventName as string, callback.bind(this) as EventListenerOrEventListenerObject);
   }
 
 
@@ -589,7 +589,7 @@ export default class SequenceCanvas {
    */
 
   public off(eventName: EventSequenceCanvas, callback: (event: CustomEvent) => void): void {
-    this.canvas.removeEventListener(eventName, callback.bind(this));
+    this.canvas.removeEventListener(eventName as string, callback.bind(this) as EventListenerOrEventListenerObject);
   }
 
 
@@ -737,7 +737,7 @@ export default class SequenceCanvas {
    */
 
   setFps(value: number): void {
-    this.fps = typeof value === 'number' && 60 >= value && value > 0 ? value : 60;
+    this.fps = 60 >= value && value > 0 ? value : 60;
   }
 
 
