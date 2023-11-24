@@ -134,8 +134,8 @@ export default class SequenceCanvas {
     // Canvas
     this.canvas = settings.canvas.element;
     this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-    this.widthCanvas = settings.canvas.width || 0;
-    this.heightCanvas = settings.canvas.height || 0;
+    this.widthCanvas = settings.canvas?.width ?? this.canvas.width;
+    this.heightCanvas = settings.canvas?.height ?? this.canvas.height;
 
     // Images
     this.images = settings.images.paths.map((path) => {

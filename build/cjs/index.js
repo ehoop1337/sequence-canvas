@@ -18,7 +18,7 @@ class SequenceCanvas {
      * @param {SettingsSequenceCanvas} settings - Settings for creating a new instance
      */
     constructor(settings) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18;
         this.initiate = false;
         this.logging = false;
         // Domestic
@@ -90,34 +90,34 @@ class SequenceCanvas {
         // Canvas
         this.canvas = settings.canvas.element;
         this.context = this.canvas.getContext("2d");
-        this.widthCanvas = settings.canvas.width || 0;
-        this.heightCanvas = settings.canvas.height || 0;
+        this.widthCanvas = (_b = (_a = settings.canvas) === null || _a === void 0 ? void 0 : _a.width) !== null && _b !== void 0 ? _b : this.canvas.width;
+        this.heightCanvas = (_d = (_c = settings.canvas) === null || _c === void 0 ? void 0 : _c.height) !== null && _d !== void 0 ? _d : this.canvas.height;
         // Images
         this.images = settings.images.paths.map((path) => {
             return { path, state: 'WAIT' };
         });
-        this.isPositionImages = ((_b = (_a = settings.images) === null || _a === void 0 ? void 0 : _a.options) === null || _b === void 0 ? void 0 : _b.position) !== undefined;
-        this.xPosImages = (_e = (_d = (_c = settings.images) === null || _c === void 0 ? void 0 : _c.options) === null || _d === void 0 ? void 0 : _d.position) === null || _e === void 0 ? void 0 : _e.x;
-        this.yPosImages = (_h = (_g = (_f = settings.images) === null || _f === void 0 ? void 0 : _f.options) === null || _g === void 0 ? void 0 : _g.position) === null || _h === void 0 ? void 0 : _h.y;
-        this.isSizeImages = ((_k = (_j = settings.images) === null || _j === void 0 ? void 0 : _j.options) === null || _k === void 0 ? void 0 : _k.size) !== undefined;
-        this.widthImages = (_o = (_m = (_l = settings.images) === null || _l === void 0 ? void 0 : _l.options) === null || _m === void 0 ? void 0 : _m.size) === null || _o === void 0 ? void 0 : _o.width;
-        this.heightImages = (_r = (_q = (_p = settings.images) === null || _p === void 0 ? void 0 : _p.options) === null || _q === void 0 ? void 0 : _q.size) === null || _r === void 0 ? void 0 : _r.height;
-        this.isTrimImages = ((_t = (_s = settings.images) === null || _s === void 0 ? void 0 : _s.options) === null || _t === void 0 ? void 0 : _t.trim) !== undefined;
-        this.xTrimImages = (_w = (_v = (_u = settings.images) === null || _u === void 0 ? void 0 : _u.options) === null || _v === void 0 ? void 0 : _v.trim) === null || _w === void 0 ? void 0 : _w.x;
-        this.yTrimImages = (_z = (_y = (_x = settings.images) === null || _x === void 0 ? void 0 : _x.options) === null || _y === void 0 ? void 0 : _y.trim) === null || _z === void 0 ? void 0 : _z.y;
-        this.widthTrimImages = (_2 = (_1 = (_0 = settings.images) === null || _0 === void 0 ? void 0 : _0.options) === null || _1 === void 0 ? void 0 : _1.trim) === null || _2 === void 0 ? void 0 : _2.width;
-        this.heightTrimImages = (_5 = (_4 = (_3 = settings.images) === null || _3 === void 0 ? void 0 : _3.options) === null || _4 === void 0 ? void 0 : _4.trim) === null || _5 === void 0 ? void 0 : _5.height;
+        this.isPositionImages = ((_f = (_e = settings.images) === null || _e === void 0 ? void 0 : _e.options) === null || _f === void 0 ? void 0 : _f.position) !== undefined;
+        this.xPosImages = (_j = (_h = (_g = settings.images) === null || _g === void 0 ? void 0 : _g.options) === null || _h === void 0 ? void 0 : _h.position) === null || _j === void 0 ? void 0 : _j.x;
+        this.yPosImages = (_m = (_l = (_k = settings.images) === null || _k === void 0 ? void 0 : _k.options) === null || _l === void 0 ? void 0 : _l.position) === null || _m === void 0 ? void 0 : _m.y;
+        this.isSizeImages = ((_p = (_o = settings.images) === null || _o === void 0 ? void 0 : _o.options) === null || _p === void 0 ? void 0 : _p.size) !== undefined;
+        this.widthImages = (_s = (_r = (_q = settings.images) === null || _q === void 0 ? void 0 : _q.options) === null || _r === void 0 ? void 0 : _r.size) === null || _s === void 0 ? void 0 : _s.width;
+        this.heightImages = (_v = (_u = (_t = settings.images) === null || _t === void 0 ? void 0 : _t.options) === null || _u === void 0 ? void 0 : _u.size) === null || _v === void 0 ? void 0 : _v.height;
+        this.isTrimImages = ((_x = (_w = settings.images) === null || _w === void 0 ? void 0 : _w.options) === null || _x === void 0 ? void 0 : _x.trim) !== undefined;
+        this.xTrimImages = (_0 = (_z = (_y = settings.images) === null || _y === void 0 ? void 0 : _y.options) === null || _z === void 0 ? void 0 : _z.trim) === null || _0 === void 0 ? void 0 : _0.x;
+        this.yTrimImages = (_3 = (_2 = (_1 = settings.images) === null || _1 === void 0 ? void 0 : _1.options) === null || _2 === void 0 ? void 0 : _2.trim) === null || _3 === void 0 ? void 0 : _3.y;
+        this.widthTrimImages = (_6 = (_5 = (_4 = settings.images) === null || _4 === void 0 ? void 0 : _4.options) === null || _5 === void 0 ? void 0 : _5.trim) === null || _6 === void 0 ? void 0 : _6.width;
+        this.heightTrimImages = (_9 = (_8 = (_7 = settings.images) === null || _7 === void 0 ? void 0 : _7.options) === null || _8 === void 0 ? void 0 : _8.trim) === null || _9 === void 0 ? void 0 : _9.height;
         // Optional
         this.fps = typeof settings.fps === 'number' && 60 >= settings.fps && settings.fps > 0 ? settings.fps : 60;
-        this.direction = (_6 = settings.direction) !== null && _6 !== void 0 ? _6 : 1;
-        this.loop = (_7 = settings.loop) !== null && _7 !== void 0 ? _7 : true;
-        this.startIndex = (_8 = settings.startIndex) !== null && _8 !== void 0 ? _8 : 0;
-        this.finishIndex = (_9 = settings.finishIndex) !== null && _9 !== void 0 ? _9 : (settings.images.paths.length ? settings.images.paths.length - 1 : 0);
-        this.currentIndex = (_10 = settings.currentIndex) !== null && _10 !== void 0 ? _10 : 0;
-        this.startImmediately = (_11 = settings.startImmediately) !== null && _11 !== void 0 ? _11 : false;
-        this.startAfterLoaded = (_12 = settings.startAfterLoaded) !== null && _12 !== void 0 ? _12 : true;
-        this.initiate = (_13 = settings.init) !== null && _13 !== void 0 ? _13 : true;
-        this.logging = (_14 = settings.logging) !== null && _14 !== void 0 ? _14 : false;
+        this.direction = (_10 = settings.direction) !== null && _10 !== void 0 ? _10 : 1;
+        this.loop = (_11 = settings.loop) !== null && _11 !== void 0 ? _11 : true;
+        this.startIndex = (_12 = settings.startIndex) !== null && _12 !== void 0 ? _12 : 0;
+        this.finishIndex = (_13 = settings.finishIndex) !== null && _13 !== void 0 ? _13 : (settings.images.paths.length ? settings.images.paths.length - 1 : 0);
+        this.currentIndex = (_14 = settings.currentIndex) !== null && _14 !== void 0 ? _14 : 0;
+        this.startImmediately = (_15 = settings.startImmediately) !== null && _15 !== void 0 ? _15 : false;
+        this.startAfterLoaded = (_16 = settings.startAfterLoaded) !== null && _16 !== void 0 ? _16 : true;
+        this.initiate = (_17 = settings.init) !== null && _17 !== void 0 ? _17 : true;
+        this.logging = (_18 = settings.logging) !== null && _18 !== void 0 ? _18 : false;
         if (settings.on) {
             this.addListenersBeforeInitialization(settings.on);
         }
