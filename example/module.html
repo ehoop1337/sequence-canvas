@@ -14,6 +14,15 @@
             margin: 0;
             padding: 0;
         }
+        canvas {
+            display: block;
+        }
+        body > div {
+            display: flex;
+            justify-content: center;
+            grid-gap: 10px;
+            padding: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -21,6 +30,15 @@
     <!-- Canvas -->
 
     <canvas id="example"></canvas>
+    <div>
+        <button class="start">start</button>
+        <button class="pause">pause</button>
+        <button class="play">play</button>
+        <button class="stop">stop</button>
+        <button class="direction">reverse direction</button>
+        fps: <input class="fps" type="number" min="1" max="60" value="60" />
+        <div class="current">Current image index: <span></span></div>
+    </div>
 
     <!-- Connection and usage -->
 
@@ -29,29 +47,62 @@
         import SequenceCanvas from "../build/esm/index.js";
 
         function createPathImage(index) {
-          return `https://kranteh-pro.ru/wp-content/themes/base/assets/i/1/LKS_seq001_${index.toString().padStart(5, '0')}.webp`;
+          return `images/explosion01-nofire-frame${index.toString().padStart(3, '0')}.webp`;
         }
-        const arrayPathImages = [...new Array(100).fill('').map((_, i) => createPathImage(i))];
+        const arrayPathImages = [...new Array(98).fill('').map((_, i) => createPathImage(i + 3))];
 
         const canvas = new SequenceCanvas({
           canvas: {
             element: document.querySelector('canvas#example'),
-            width: 1920,
-            height: 950,
+            width: innerWidth,
+            height: 600,
           },
           images: {
             paths: arrayPathImages,
+            options: {
+              size: {
+                width: 400,
+                height: 400,
+              },
+              position: {
+                x: innerWidth / 2 - 200,
+                y: 600 / 2 - 200
+              }
+            }
           },
           on: {
-            loaded: function(event) {
-              console.log('loaded', event);
+            init: function(event) {
+              console.log('init', event);
             }
           }
         });
-        canvas.on('start', function(event) {
-          console.log('start', event);
+        const current = document.querySelector('.current > span');
+        canvas.on('render', function() {
+          current.textContent = canvas.getCurrentImage();
         });
 
+        // Buttons
+        const startButton = document.querySelector('.start');
+        const pauseButton = document.querySelector('.pause');
+        const playButton = document.querySelector('.play');
+        const stopButton = document.querySelector('.stop');
+        const directionButton = document.querySelector('.direction');
+        const fps = document.querySelector('.fps');
+
+        startButton.addEventListener('click', () => canvas.start());
+        pauseButton.addEventListener('click', () => canvas.pause());
+        playButton.addEventListener('click', () => canvas.play());
+        stopButton.addEventListener('click', () => canvas.stop());
+        directionButton.addEventListener('click', () => canvas.setDirection(canvas.getDirection() === 1 ? -1 : 1));
+        fps.addEventListener('input', function(e) {
+          if (!e.target.value.length) return;
+          const value = Number(e.target.value);
+          if (value > 60) fps.value = 60;
+          if (value < 1) fps.value = 1;
+          canvas.pause();
+          canvas.setFps(value);
+          canvas.play();
+        })
     </script>
 </body>
 </html>

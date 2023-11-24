@@ -520,6 +520,7 @@ export default class SequenceCanvas {
     this.canvas.dispatchEvent(this.events.stop);
     this.setRendering(false);
     this.setCurrentImage(this.startIndex);
+    this.drawImage(this.startIndex);
   }
 
 
