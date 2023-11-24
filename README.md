@@ -9,7 +9,7 @@ Frame-by-frame reproduction of images in HTML Canvas
     npm install sequence-canvas
 ```
 
-`ES6`
+`ES Module`
 
 ```javascript
     import SequenceCanvas from 'sequence-canvas';
