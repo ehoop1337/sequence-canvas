@@ -29,7 +29,7 @@ Frame-by-frame reproduction of images in HTML Canvas
     });
 ```
 
-#### Bundle
+#### Script
 
 `HTML`
 
