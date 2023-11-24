@@ -22,7 +22,7 @@ Frame-by-frame reproduction of images in HTML Canvas
 `CommonJS`
 
 ```javascript
-    const SequenceCanvas = include('sequence-canvas');
+    const SequenceCanvas = require('sequence-canvas');
     
     const canvas = new SequenceCanvas({
       // settings
