@@ -3,10 +3,14 @@ Frame-by-frame reproduction of images in HTML Canvas
 
 ## Installation
 
-#### Package Managers
+#### Package Manager
+
 ```sh
     npm install sequence-canvas
 ```
+
+`ES6`
+
 ```javascript
     import SequenceCanvas from 'sequence-canvas';
     
@@ -15,7 +19,20 @@ Frame-by-frame reproduction of images in HTML Canvas
     });
 ```
 
-#### Loading js file
+`CommonJS`
+
+```javascript
+    const SequenceCanvas = include('sequence-canvas');
+    
+    const canvas = new SequenceCanvas({
+      // settings
+    });
+```
+
+#### Bundle
+
+`html`
+
 ```html
     <script src="sequence-canvas.js"></script>
     <script>
@@ -25,45 +42,49 @@ Frame-by-frame reproduction of images in HTML Canvas
     </script>
 ```
 
+`cdn`
+
+- https://cdn.jsdelivr.net/gh/ehoop1337/sequence-canvas/lib/sequence-canvas.js
+
 ## Settings
 
 `Required`
 
-| Option | Type  | Description |
-| ------ | ------ | ------ |
-| canvas | object |  |
+| Option | Type              | Description |
+| ------ |-------------------| ------ |
+| canvas | object            |  |
 | canvas.element | HTMLCanvasElement |  |
-| images | object |  |
-| images.paths | array |  |
+| images | object            |  |
+| images.paths | Array<string>     |  |
 
 `Optional`
 
-| Option | Type | Default           | Description |
-| ------ | ------ |-------------------| ------ |
-| canvas.width | number |                   |  |
-| canvas.height | number |                   |  |
-| images.options | object |                   |  |
-| images.options.position | object |                   |  |
-| images.options.position.x | number |                   |  |
-| images.options.position.y | number |                   |  |
-| images.options.trim | object |                   |  |
-| images.options.trim.x | number |                   |  |
-| images.options.trim.y | number |                   |  |
-| images.options.trim.width | number |                   |  |
-| images.options.trim.height | number |                   |  |
-| images.options.size | object |                   |  |
-| images.options.size.width | number |                   |  |
-| images.options.size.height | number |                   |  |
-| init | boolean | true              |  |
-| direction | 1 \| -1                | 1 |  |
-| loop | boolean | true              |  |
+| Option | Type     | Default           | Description |
+| ------ |----------|-------------------| ------ |
+| canvas.width | number   |                   |  |
+| canvas.height | number   |                   |  |
+| images.options | object   |                   |  |
+| images.options.position | object   |                   |  |
+| images.options.position.x | number   |                   |  |
+| images.options.position.y | number   |                   |  |
+| images.options.trim | object   |                   |  |
+| images.options.trim.x | number   |                   |  |
+| images.options.trim.y | number   |                   |  |
+| images.options.trim.width | number   |                   |  |
+| images.options.trim.height | number   |                   |  |
+| images.options.size | object   |                   |  |
+| images.options.size.width | number   |                   |  |
+| images.options.size.height | number   |                   |  |
+| init | boolean  | true              |  |
+| direction | 1 \      | -1                | 1 |  |
+| loop | boolean  | true              |  |
 | fps | 1 ... 60 | 60                |  |
-| startIndex | number | 0                 |  |
-| finishIndex | number | images.length - 1 |  |
-| currentIndex | number | 0                 |  |
-| startImmediately | boolean | false             |  |
-| startAfterLoaded | boolean | true              |  |
-| logging | boolean | false             |  |
+| startIndex | number   | 0                 |  |
+| finishIndex | number   | images.length - 1 |  |
+| currentIndex | number   | 0                 |  |
+| startImmediately | boolean  | false             |  |
+| startAfterLoaded | boolean  | true              |  |
+| logging | boolean  | false             |  |
 
 ## Methods
 | Method          | Description |
@@ -122,6 +143,11 @@ canvas.pause();
 ```javascript
 const canvas = new SequenceCanvas({
   // ...
+  on: {
+    'init': function(event) {
+      console.log('init', event);
+    }
+  }
 });
 // ...
 function pauseHandler() {
