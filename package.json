@@ -1,6 +1,6 @@
 {
   "name": "sequence-canvas",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Frame-by-frame reproduction of images in HTML Canvas",
   "keywords": [
     "canvas",
@@ -13,7 +13,7 @@
   "license": "MIT",
   "types": "./lib/index.d.ts",
   "main": "./lib/index.cjs",
-  "module": "./lib/index.mjs",
+  "module": "./lib/index.js",
   "files": [
     "lib",
     "LICENSE",

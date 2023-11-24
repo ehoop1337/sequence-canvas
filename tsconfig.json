@@ -6,9 +6,13 @@
     "outDir": "lib",
     "rootDir": "src",
     "noImplicitAny": true,
-    "declaration": true
+    "declaration": true,
+//    "emitDeclarationOnly": true,
+//    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+//    "strict": true,
+    "skipLibCheck": true
   },
-
   "include": ["./src/**/*"],
-  "exclude": ["./node_modules"]
+  "exclude": ["./node_modules"],
 }

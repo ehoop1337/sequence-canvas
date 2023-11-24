@@ -62,7 +62,6 @@ export interface ImageSequenceCanvas {
 }
 
 
-
 /**
  * Creates a new sequence canvas.
  * @name SequenceCanvas

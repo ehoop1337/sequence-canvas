@@ -1,4 +1,4 @@
-const { build } = require('esbuild')
+const { build } = require('esbuild');
 
 // options
 const shared = {
@@ -10,12 +10,12 @@ const shared = {
 // mjs
 build({
   ...shared,
-  outfile: 'lib/index.mjs',
+  outfile: 'lib/index.js',
   format: 'esm',
 }).then(() => {
-  console.log('End build lib/sequence-canvas.mjs')
+  console.log('End build lib/index.js')
 }).catch((e) => {
-  console.log('Error build lib/sequence-canvas.mjs:', e)
+  console.log('Error build lib/index.js:', e)
 });
 
 // cjs
@@ -24,7 +24,7 @@ build({
   outfile: 'lib/index.cjs',
   format: 'cjs',
 }).then(() => {
-  console.log('End build lib/sequence-canvas.cjs')
+  console.log('End build lib/index.cjs')
 }).catch((e) => {
-  console.log('Error build lib/sequence-canvas.cjs:', e)
+  console.log('Error build lib/index.cjs:', e)
 });
