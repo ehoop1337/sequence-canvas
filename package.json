@@ -1,6 +1,6 @@
 {
   "name": "sequence-canvas",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Frame-by-frame reproduction of images in HTML Canvas",
   "keywords": [
     "canvas",
