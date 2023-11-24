@@ -9,7 +9,7 @@ Frame-by-frame reproduction of images in HTML Canvas
     npm install sequence-canvas
 ```
 
-`ES6`
+`ES Module`
 
 ```javascript
     import SequenceCanvas from 'sequence-canvas';
@@ -29,7 +29,7 @@ Frame-by-frame reproduction of images in HTML Canvas
     });
 ```
 
-#### Bundle
+#### Script
 
 `HTML`
 
@@ -61,8 +61,8 @@ Frame-by-frame reproduction of images in HTML Canvas
 
 | Option                     | Type    | Default           | Description                                                                                                                                                                            |
 |----------------------------|---------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| canvas.width               | number  |                   | Width of the canvas.                                                                                                                                                                   |
-| canvas.height              | number  |                   | Height of the canvas                                                                                                                                                                   |
+| canvas.width               | number  | canvas.element.width                   | Width of the canvas.                                                                                                                                                                   |
+| canvas.height              | number  | canvas.element.height                  | Height of the canvas                                                                                                                                                                   |
 | images.options             | object  |                   | An object containing images settings.                                                                                                                                                  |
 | images.options.position    | object  |                   | It can be used without specifying the `trim` and `size` properties.                                                                                                                    |
 | images.options.position.x  | number  |                   | The X coordinate on the canvas where the image will be placed.                                                                                                                         |
