@@ -31,7 +31,7 @@ Frame-by-frame reproduction of images in HTML Canvas
 
 #### Bundle
 
-`html`
+`HTML`
 
 ```html
     <script src="sequence-canvas.js"></script>
@@ -42,7 +42,7 @@ Frame-by-frame reproduction of images in HTML Canvas
     </script>
 ```
 
-`cdn`
+`CDN`
 
 - https://cdn.jsdelivr.net/gh/ehoop1337/sequence-canvas/lib/sequence-canvas.js
 
