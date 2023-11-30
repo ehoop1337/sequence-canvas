@@ -46,6 +46,52 @@ Frame-by-frame reproduction of images in HTML Canvas
 
 - https://cdn.jsdelivr.net/gh/ehoop1337/sequence-canvas/lib/sequence-canvas.js
 
+## Example
+
+```javascript
+const canvas = new SequenceCanvas({
+  // required object
+  canvas: {
+    // required property
+    element: document.querySelector('canvas'),
+    width: innerWidth,
+    height: innerHeight,
+  },
+  // required object
+  images: {
+    // required property
+    paths: ['../img/01.webp', '../img/02.webp', '../img/03.webp'],
+    options: {
+      size: {
+        width: 400,
+        height: 400,
+      },
+      position: {
+        x: innerWidth / 2 - 200,
+        y: innerHeight / 2 - 200
+      }
+    }
+  },
+  init: true,
+  direction: -1,
+  loop: false,
+  fps: 30,
+  startIndex: 0,
+  finishIndex: 2,
+  currentIndex: 0,
+  startImmediately: false,
+  startAfterLoaded: true,
+  logging: true,
+  on: {
+    init: function () {
+      console.log('init');
+    }
+  }
+});
+
+canvas.on('stop', function() { console.log('stop')});
+```
+
 ## Settings
 
 `Required`
