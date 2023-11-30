@@ -1,6 +1,8 @@
 # sequence-canvas
 Frame-by-frame reproduction of images in HTML Canvas
 
+[https://jsfiddle.net/ehoop1337/ukg3L75y/](https://jsfiddle.net/ehoop1337/ukg3L75y/)
+
 ## Installation
 
 #### Package Manager
@@ -44,7 +46,7 @@ Frame-by-frame reproduction of images in HTML Canvas
 
 `CDN`
 
-- https://cdn.jsdelivr.net/gh/ehoop1337/sequence-canvas/lib/sequence-canvas.js
+[https://cdn.jsdelivr.net/gh/ehoop1337/sequence-canvas/lib/sequence-canvas.js](https://cdn.jsdelivr.net/gh/ehoop1337/sequence-canvas/lib/sequence-canvas.js)
 
 ## Example
 
